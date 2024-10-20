@@ -4,22 +4,24 @@ pipeline {
     stages {
         stage('List files') {
             steps {
-                sh 'ls -l'  // Remplace 'dir' par 'ls -l' pour Linux
+                sh 'ls -l'
             }
         }
         stage('Compile') {
             steps {
-                sh 'javac -d out src/Main.java'  // Utilise 'sh' pour exécuter la commande de compilation
+                sh 'javac -d out src/Main.java'
             }
         }
         stage('Test') {
             steps {
-                sh 'java -classpath lib/* src/MainTest.java'  // Exécute les tests avec 'sh'
+                sh '''
+                    java -cp "lib/*:." src.MainTest
+                '''
             }
         }
         stage('Run') {
             steps {
-                sh 'java -cp out Main'  // Exécute le programme avec 'sh'
+                sh 'java -cp out Main'
             }
         }
     }
