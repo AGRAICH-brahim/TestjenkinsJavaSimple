@@ -4,22 +4,22 @@ pipeline {
     stages {
         stage('List files') {
             steps {
-                bat 'dir'
+                sh 'ls -l'  // Remplace 'dir' par 'ls -l' pour Linux
             }
         }
         stage('Compile') {
             steps {
-                bat 'javac -d out src/Main.java'
+                sh 'javac -d out src/Main.java'  // Utilise 'sh' pour exécuter la commande de compilation
             }
         }
         stage('Test') {
             steps {
-                bat 'java -classpath lib/* src/MainTest.java'
+                sh 'java -classpath lib/* src/MainTest.java'  // Exécute les tests avec 'sh'
             }
         }
         stage('Run') {
             steps {
-                bat 'java -cp out Main'
+                sh 'java -cp out Main'  // Exécute le programme avec 'sh'
             }
         }
     }
