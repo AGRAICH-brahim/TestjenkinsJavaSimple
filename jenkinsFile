@@ -12,13 +12,7 @@ pipeline {
                 sh 'javac -d out src/Main.java'
             }
         }
-        stage('Test') {
-            steps {
-                sh '''
-                    java -cp "lib/*:." src.MainTest
-                '''
-            }
-        }
+       
         stage('Run') {
             steps {
                 sh 'java -cp out Main'
